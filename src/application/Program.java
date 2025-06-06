@@ -30,7 +30,7 @@ public class Program {
 		System.out.println("=== Test 3: Seller findByAll ===");
 		//list = sellerDao.findAll();
 		
-		list.forEach(System.out::println);
+		//list.forEach(System.out::println);
 		
 		
 //		System.out.println("=== Test 4: Seller insert ===");
@@ -39,14 +39,17 @@ public class Program {
 //		
 //		System.out.println("Inserte new Id! "+ newSeller.getId());
 		
-		System.out.println("=== Test 5: Seller update ===");
-		seller = sellerDao.findById(13);
-		seller.setName("andre");
-		seller.setEmail("andre@123");
-		sellerDao.update(seller);
+//		System.out.println("=== Test 5: Seller update ===");
+//		seller = sellerDao.findById(13);
+//		seller.setName("andre");
+//		seller.setEmail("andre@123");
+//		sellerDao.update(seller);
+//		
+//		System.out.println("update! "+ seller);
 		
-		System.out.println("update! "+ seller);
-		
+		System.out.println("=== Test 6: Seller deleteById ===");
+		sellerDao.deleteById(19);
+		System.out.println("Delete completo");
 	}
 
 }
