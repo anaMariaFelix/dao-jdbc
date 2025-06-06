@@ -12,8 +12,8 @@ public class ProgramDepartment {
 
 		DepartmentDAO depDao = DaoFactory.createDepartmentDao();
 		
-		System.out.println("===Test 1 insert===");
-		Department dep = new Department(1,"x");
+//		System.out.println("===Test 1 insert===");
+//		Department dep = new Department(1,"x");
 //		depDao.insert(dep);
 //		System.out.println("Department: "+ dep);
 //		System.out.println();

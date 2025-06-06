@@ -6,15 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import db.DB;
 import db.DbException;
 import model.dao.DepartmentDAO;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class DepartmentImplJDBC implements DepartmentDAO {
 
@@ -29,7 +26,9 @@ public class DepartmentImplJDBC implements DepartmentDAO {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO department " + "(Name) " + "VALUES (?)",
+			st = conn.prepareStatement("INSERT INTO department " 
+					+ "(Name) " 
+					+ "VALUES (?)",
 					Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, obj.getNome());
@@ -63,7 +62,10 @@ public class DepartmentImplJDBC implements DepartmentDAO {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("UPDATE department  " + "SET Name = ? " + "WHERE Id = ?");
+			st = conn.prepareStatement(
+					"UPDATE department  " 
+					+ "SET Name = ? " 
+					+ "WHERE Id = ?");
 
 			st.setString(1, obj.getNome());
 			st.setInt(2, obj.getId());
@@ -83,7 +85,9 @@ public class DepartmentImplJDBC implements DepartmentDAO {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("DELETE FROM department " + "WHERE id = ? ");
+			st = conn.prepareStatement(
+					"DELETE FROM department " 
+					+ "WHERE id = ? ");
 
 			st.setInt(1, id);
 
@@ -102,7 +106,9 @@ public class DepartmentImplJDBC implements DepartmentDAO {
 		ResultSet rs = null;
 
 		try {
-			st = conn.prepareStatement("SELECT * FROM department " + "WHERE id = ? ");
+			st = conn.prepareStatement(
+					"SELECT * FROM department " 
+					+ "WHERE id = ? ");
 
 			st.setInt(1, id);
 			rs = st.executeQuery();
