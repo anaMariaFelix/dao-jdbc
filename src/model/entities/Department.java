@@ -8,7 +8,7 @@ public class Department implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String nome;
+	private String name;
 	
 	public Department() {
 	
@@ -16,7 +16,7 @@ public class Department implements Serializable{
 
 	public Department(Integer id, String nome) {
 		this.id = id;
-		this.nome = nome;
+		this.name = nome;
 	}
 
 	public Integer getId() {
@@ -28,11 +28,11 @@ public class Department implements Serializable{
 	}
 
 	public String getNome() {
-		return nome;
+		return name;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.name = nome;
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class Department implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", nome=" + nome + "]";
+		return "Department [id=" + id + ", nome=" + name + "]";
 	}
 	
 }
