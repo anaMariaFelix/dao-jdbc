@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
@@ -74,6 +77,50 @@ public class SellerDaoImplJDBC implements SellerDAO {
 		return null;
 	}
 
+	@Override
+	public List<Seller> findByDepartment(Department department) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+
+		try {
+			st = conn.prepareStatement(
+					"SELECT seller.*,department.Name as DepName  "
+					+"FROM seller INNER JOIN department  "
+					+"ON seller.DepartmentId = department.Id "
+					+"WHERE DepartmentId = ? "
+					+"ORDER BY Name");
+
+			st.setInt(1, department.getId());
+			rs = st.executeQuery();
+			
+			List<Seller> list = new ArrayList<Seller>();
+			Map<Integer, Department> map = new HashMap<Integer, Department>();
+			
+			while(rs.next()) {
+				Department dep = map.get(rs.getInt("DepartmentId"));//se ja existir um departamento ele vai retorna o department para minha varivel
+																	//isso ta sendo feito para que n tenha mais de uma instancia de department e sim uma msm instancia para todos os selles
+				if(dep == null) {//se n existir um department entao ele pode ser instanciado
+					dep = instantiateDepartment(rs);
+					map.put(rs.getInt("DepartmentId"), dep);
+				}
+				
+
+				Seller obj = instantiateSeller(rs, dep);
+				list.add(obj);
+			}
+
+			return list;
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+
+	}
+	
+	
 	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {//metodo auxiliar para instanciar um Seller
 		Seller obj = new Seller();
 
@@ -94,5 +141,7 @@ public class SellerDaoImplJDBC implements SellerDAO {
 
 		return dep;
 	}
+
+	
 
 }
